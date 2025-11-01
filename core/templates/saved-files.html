@@ -1,66 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saved Files</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /* ... (same base styles as parent-homepage.html) ... */
-        .reports-container {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 30px;
-        }
-        .report-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-        .report-item:hover {
-            background: #f7fafc;
-        }
-        .report-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .report-icon {
-            font-size: 24px;
-            color: #667eea;
-        }
-        .report-details h3 {
-            margin: 0;
-            color: #2d3748;
-        }
-        .report-details p {
-            margin: 5px 0 0;
-            color: #718096;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .action-btn {
-            padding: 8px 15px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .view-btn {
-            background: #667eea;
-            color: white;
-        }
-        .delete-btn {
-            background: #fc8181;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <div class="container">
@@ -71,7 +17,7 @@
             </button>
         </div>
 
-        <button class="action-btn" onclick="window.location.href='parent-homepage.html'">
+        <button class="action-btn" onclick="window.location.href='/parent-homepage'">
             <i class="fas fa-arrow-left"></i> Back to Homepage
         </button>
 
@@ -84,7 +30,7 @@
         window.onload = async function() {
             const userStatus = sessionStorage.getItem('userStatus');
             if (!userStatus || userStatus !== 'Parent') {
-                window.location.href = 'login.html';
+                window.location.href = '/login';
                 return;
             }
             
@@ -139,7 +85,7 @@
                 
                 // Store report data and redirect to view page
                 sessionStorage.setItem('viewReport', JSON.stringify(report));
-                window.location.href = 'view-report.html';
+                window.location.href = '/view-report';
             } catch (error) {
                 console.error('Error viewing report:', error);
                 alert('Error loading report details');
@@ -174,7 +120,7 @@
 
         function logout() {
             sessionStorage.clear();
-            window.location.href = 'login.html';
+            window.location.href = '/login';
         }
     </script>
 </body>

@@ -1,89 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Special Needs Reporting System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
-        }
-        .header {
-            background-color: #1a73e8;
-            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .logout-btn {
-            background-color: #fff;
-            color: #dc3545;
-            border: 2px solid #dc3545;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .logout-btn:hover {
-            background-color: #dc3545;
-            color: white;
-        }
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        .dashboard-title {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            padding: 1rem;
-        }
-        .dashboard-button {
-            background-color: #fff;
-            color: #1a73e8;
-            border: 2px solid #1a73e8;
-            padding: 2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            text-align: center;
-            transition: transform 0.2s, background-color 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .dashboard-button:hover {
-            background-color: #1a73e8;
-            color: white;
-            transform: translateY(-5px);
-        }
-        .dashboard-button i {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        .button-description {
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            opacity: 0.9;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <div class="header">
@@ -157,19 +80,19 @@
         function navigateTo(page) {
             switch(page) {
                 case 'students-enrolled':
-                    window.location.href = '/students-enrolled/';
+                    window.location.href = '/students-enrolled';
                     break;
                 case 'students-assessment':
-                    window.location.href = '/assessment-generator/';
+                    window.location.href = '/assessment-generator';
                     break;
                 case 'students-assessed':
-                    window.location.href = '/assessed-students/';
+                    window.location.href = '/assessed-students';
                     break;
                 case 'weekly-progress':
-                    window.location.href = '/weekly-progress?action=list/';
+                    window.location.href = '/weekly-progress/?action=list';
                     break;
                 case 'iep-generation':
-                    window.location.href = '/iep-generation/';
+                    window.location.href = '/iep-generation';
                     break;
             }
         }
@@ -178,13 +101,13 @@
         function handleProgressReport(action, studentId) {
             switch(action) {
                 case 'generate':
-                    window.location.href = `weekly-progress.html?action=generate&studentId=${studentId}`;
+                    window.location.href = `/weekly-progress/?action=generate&studentId=${studentId}`;
                     break;
                 case 'download':
-                    window.location.href = `weekly-progress.html?action=download&studentId=${studentId}`;
+                    window.location.href = `/weekly-progress/?action=download&studentId=${studentId}`;
                     break;
                 case 'share':
-                    window.location.href = `weekly-progress.html?action=share&studentId=${studentId}`;
+                    window.location.href = `/weekly-progress/?action=share&studentId=${studentId}`;
                     break;
             }
         }

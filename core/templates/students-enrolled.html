@@ -1,208 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Students Enrolled - Special Needs Reporting System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /* ... Include your existing styles ... */
-        .student-list {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-        }
-
-        .student-card {
-            background-color: white;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            cursor: pointer;
-        }
-
-        .student-card:hover {
-            background-color: #f8f9fa;
-        }
-
-        .document-list {
-            display: none;
-            margin-left: 2rem;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-left: 3px solid #4CAF50;
-        }
-
-        .document-link {
-            display: block;
-            padding: 0.5rem;
-            color: #333;
-            text-decoration: none;
-            margin-bottom: 0.5rem;
-        }
-
-        .document-link:hover {
-            color: #4CAF50;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background-color: #7B68EE;
-            color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .logo-section:hover {
-            transform: scale(1.02);
-        }
-
-        .logo-section img {
-            height: 45px;
-            width: 45px;
-            background: white;
-            border-radius: 50%;
-            padding: 5px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        #userEmail {
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .logout-btn {
-            background-color: white;
-            color: #333;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background-color: #f0f0f0;
-            transform: translateY(-2px);
-        }
-
-        .student-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            /* ... keep existing student-card styles ... */
-        }
-
-        .student-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .student-avatar {
-            background-color: #4CAF50;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .document-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            /* ... keep existing document-link styles ... */
-        }
-
-        .expand-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .expanded .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .title-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .title-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .title-content i {
-            font-size: 1.5rem;
-            color: #7B68EE;
-        }
-
-        .title-content h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            color: #333;
-        }
-
-        .search-container {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        #searchInput {
-            padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-
-        .search-btn {
-            background: #7B68EE;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .search-btn:hover {
-            background: #6c5ce7;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <div class="header">
         <div class="logo-section">
-            <img src="./images/AraLogo.png" alt="Ara Logo" onclick="goToAdminDashboard()">
+            <img src="{% static 'images/AraLogo.png' %}" alt="ARA Logo" class="logo" onclick="goToAdminDashboard()">
         </div>
         <div class="user-info">
             <span id="userEmail">specialist@gg.com</span>
@@ -234,7 +43,7 @@
             const userEmail = sessionStorage.getItem('userEmail');
             
             if (!userStatus || userStatus !== 'Admin') {
-                window.location.href = 'login.html';
+                window.location.href = '/login';
                 return;
             }
             
@@ -301,20 +110,20 @@
             // Handle document viewing based on type and student ID
             switch(type) {
                 case 'assessment':
-                    window.location.href = `assessment-view.html?student=${studentId}`;
+                    window.location.href = `/assessment-view/?student=${studentId}`;
                     break;
                 case 'iep':
-                    window.location.href = `iep-view.html?student=${studentId}`;
+                    window.location.href = `/iep-view/?student=${studentId}`;
                     break;
                 case 'progress':
-                    window.location.href = `weekly-progress-view.html?student=${studentId}`;
+                    window.location.href = `/weekly-progress-view/?student=${studentId}`;
                     break;
             }
         }
 
         // Function to go back to admin dashboard
         function goToAdminDashboard() {
-            window.location.href = 'admin-dashboard.html';
+            window.location.href = '/admin-dashboard';
         }
 
         // Function to handle logout
@@ -322,7 +131,7 @@
             // Clear any session data if needed
             sessionStorage.clear();
             // Redirect to login page
-            window.location.href = 'login.html';
+            window.location.href = '/login';
         }
 
         // Update search functionality
